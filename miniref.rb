@@ -23,7 +23,7 @@ def number_refs(text)
   
   # We first process bib to generate the numbering
   # as we want the bib to be sorted.
-  # As we want to allow a citation to refer to further citations
+  # We want to allow a citation to refer to further citations
   # therefore we assume all citations are at the beginning of a new line
   # and aligned (i.e. equally indented).
 
@@ -36,8 +36,6 @@ def number_refs(text)
 
   counter = 0
   bib.scan(/^#{indent}\[(\^[^\]\n]+)\]/m) { refs[$1] = "#{counter += 1}" }
-
-puts refs.inspect
   
   # now we have a list of keys and replacements and we can proceed
   # the whole body
