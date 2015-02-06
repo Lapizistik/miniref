@@ -19,8 +19,14 @@ def number_refs(text)
   # starting with [^....] (which may be indented) to find
   # the beginning of the bib-section.
   
-  main, indent, bib = body.split(/(?=\n\n([ \t]*)\[\^[^\]\n]+\])/, 2)
-  
+  _, indent, bib = body.split(/(?=\n\n([ \t]*)\[\^[^\]\n]+\])/, 2)
+
+  unless bib
+    warn "No bib section found"
+    bib = ""
+  end
+
+
   # We first process bib to generate the numbering
   # as we want the bib to be sorted.
   # We want to allow a citation to refer to further citations
@@ -65,7 +71,7 @@ def main
     end
 
     opts.on( '-o', '--outfile FILE', 'Write to FILE' ) do |file|
-      options[:infile] = file
+      options[:outfile] = file
     end
  
     # This displays the help screen
