@@ -64,7 +64,7 @@ def main
   optparse = OptionParser.new do |opts|
 
     # Set a banner, displayed at the top of the help screen.
-    opts.banner = "Usage: miniref.rb [file]"
+    opts.banner = "Usage: miniref.rb [infile] [outfile]"
 
     opts.on( '-i', '--infile FILE', 'Read from FILE' ) do |file|
       options[:infile] = file
@@ -84,7 +84,7 @@ def main
   optparse.parse!
 
   infilename = options[:infile] || ARGV.shift || '-'
-  outfilename = options[:outfile] || infilename
+  outfilename = options[:outfile] || ARGV.shift || '-'
 
   unless ARGV.empty?
     warn "unexpected parameters: #{ARGV.join(', ')}"
